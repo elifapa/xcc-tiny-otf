@@ -1,0 +1,12 @@
+Select(
+  expressions=[
+    Column(
+      this=Identifier(this=a, quoted=False))],
+  from=From(
+    this=Subquery(
+      this=Select(
+        expressions=[
+          Star()],
+        from=From(
+          this=Table(
+            this=Identifier(this=table_A, quoted=False)))))))

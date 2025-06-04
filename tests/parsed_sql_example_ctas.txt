@@ -1,0 +1,17 @@
+Create(
+  this=Schema(
+    this=Table(
+      this=Identifier(this=orders_column_aliased, quoted=False)),
+    expressions=[
+      Identifier(this=order_date, quoted=False),
+      Identifier(this=total_price, quoted=False)]),
+  kind=TABLE,
+  expression=Select(
+    expressions=[
+      Column(
+        this=Identifier(this=orderdate, quoted=False)),
+      Column(
+        this=Identifier(this=totalprice, quoted=False))],
+    from=From(
+      this=Table(
+        this=Identifier(this=orders, quoted=False)))))

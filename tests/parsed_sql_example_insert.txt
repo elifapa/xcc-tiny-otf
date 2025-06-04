@@ -1,0 +1,21 @@
+Insert(
+  this=Schema(
+    this=Table(
+      this=Identifier(this=test_table, quoted=False)),
+    expressions=[
+      Identifier(this=first_name, quoted=False),
+      Identifier(this=last_name, quoted=False),
+      Identifier(this=age, quoted=False)]),
+  expression=Values(
+    expressions=[
+      Tuple(
+        expressions=[
+          Literal(this='gary', is_string=True),
+          Literal(this='clark', is_string=True),
+          Literal(this=34, is_string=False)]),
+      Tuple(
+        expressions=[
+          Literal(this='rick', is_string=True),
+          Literal(this='vergunst', is_string=True),
+          Literal(this=28, is_string=False)])])
+)

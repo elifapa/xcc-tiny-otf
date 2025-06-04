@@ -1,0 +1,50 @@
+{
+  "test_table": {
+    "schema": [
+      {
+        "name": "first_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "last_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "age",
+        "type": "INT"
+      }
+    ],
+    "storage": {
+      "format": "parquet",
+      "path": "data/test_table"
+    }
+  },
+  "employee": {
+    "schema": [
+      {
+        "name": "emp_id",
+        "type": "INT"
+      },
+      {
+        "name": "emp_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "hire_date",
+        "type": "DATE"
+      },
+      {
+        "name": "salary",
+        "type": "DOUBLE"
+      },
+      {
+        "name": "is_active",
+        "type": "BOOLEAN"
+      }
+    ],
+    "storage": {
+      "format": "parquet",
+      "path": "data/employee"
+    }
+  }
+}

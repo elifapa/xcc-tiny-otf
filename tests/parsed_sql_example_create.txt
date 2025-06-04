@@ -1,0 +1,18 @@
+Create(
+  this=Schema(
+    this=Table(
+      this=Identifier(this=orders, quoted=False)),
+    expressions=[
+      ColumnDef(
+        this=Identifier(this=orderkey, quoted=False),
+        kind=DataType(this=Type.BIGINT, nested=False)),
+      ColumnDef(
+        this=Identifier(this=orderstatus, quoted=False),
+        kind=DataType(this=Type.VARCHAR, nested=False)),
+      ColumnDef(
+        this=Identifier(this=totalprice, quoted=False),
+        kind=DataType(this=Type.DOUBLE, nested=False)),
+      ColumnDef(
+        this=Identifier(this=orderdate, quoted=False),
+        kind=DataType(this=Type.DATE, nested=False))]),
+  kind=TABLE)

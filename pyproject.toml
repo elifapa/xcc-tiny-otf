@@ -1,0 +1,19 @@
+[project]
+name = "tiny-otf"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.2.5",
+    "pandas>=2.2.3",
+    "pyarrow>=20.0.0",
+    "sqlglot>=26.17.1",
+]
+
+[project.scripts]
+tiny-otf = "tiny_otf:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
