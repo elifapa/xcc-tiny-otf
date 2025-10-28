@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from tiny_otf.storage.storage import BaseStorage, ParquetDataStorage
+from tiny_otf.storage.storage import BaseStorage, LocalFSDataStorage
 from tiny_otf.config import METADATA_PATH
 
 class TableMetadata:
@@ -76,6 +76,6 @@ class TableMetadata:
 
         match fmt:
             case "parquet":
-                return ParquetDataStorage(path)
+                return LocalFSDataStorage(path)
             case _:
                 return ValueError(f"Unsupported storage format: {fmt}")        

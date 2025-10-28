@@ -5,6 +5,7 @@ def main() -> None:
     print("Hello from tiny-otf!")
 
     engine = TinyEngine()
+
     sqls = [
         "create table test_table (first_name VARCHAR, last_name VARCHAR, age INT)",
         "insert into test_table (first_name, last_name, age) values('gary', 'clark', 34), ('rick', 'vergunst', 28)",
@@ -16,13 +17,16 @@ def main() -> None:
     ]
 
     for sql in sqls:
+        
         try:
             print("Processing sql:\n ", sql)
+
             my_plan = SqlParser("presto", sql).to_plan()
             result = engine.execute(my_plan)
-            #result = engine._execute_select(my_plan)
+
             print("Query result: \n", result)
             print("\n")
+
         except Exception as e:
             print(f"Error: {e}\n")
 

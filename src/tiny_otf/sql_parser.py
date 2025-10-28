@@ -30,15 +30,12 @@ class SqlParser:
             case exp.Create:
                 # if expr.args.get("expression"):  # CTAS
                 #     return CTASPlan.from_expr(expr)
-                print("Dispatching create plan...")
                 return CreateTablePlan.from_expr(expr)
 
             case exp.Insert:
-                print("Dispatching insert plan...")
                 return InsertPlan.from_expr(expr)
 
             case exp.Select:
-                print("Dispatching select plan...")
                 return SelectPlan.from_expr(expr)
 
             case _:

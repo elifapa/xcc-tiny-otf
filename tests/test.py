@@ -1,6 +1,30 @@
 from sqlglot import parse_one, exp
 from pathlib import Path
 from tiny_otf.sql_parser import SqlParser
+from tiny_otf.engine import TinyEngine
+from tiny_otf.storage.storage import MinioDataStorage
+import pandas as pd
+from minio import Minio
+import os
+import io
+from datetime import datetime
+
+
+client =  Minio(os.getenv("MINIO_URL"), 
+                     access_key= os.getenv("ACCESS_KEY"), 
+                     secret_key=os.getenv("SECRET_KEY"),
+                     secure=False)
+
+data = [['gary', 'clark', '34'], ['rick', 'vergunst', '28']]
+df = pd.DataFrame(data, columns=['first_name', 'last_name', 'age'])
+bytes = df.to_parquet()
+buffer = io.BytesIO(bytes)
+path = Path("data/") / "test_table" / datetime.today().strftime('%Y-%m-%d')
+file_name = f"raw_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}.parquet"
+print(f"{path}/{file_name}")
+client.put_object(
+            os.getenv("BUCKET_NAME"), f"{path}/{file_name}", buffer, length=len(bytes)
+        )
 
 # sql = "INSERT INTO test_table (first_name, age) VALUES ('gary', 34)"
 # stmt = parse_one(sql)

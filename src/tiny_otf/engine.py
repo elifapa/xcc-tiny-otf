@@ -1,15 +1,14 @@
 
 import pandas as pd
 from tiny_otf.sql_parser import BasePlan, CreateTablePlan, InsertPlan, SelectPlan
-from tiny_otf.storage.storage import ParquetDataStorage
 from tiny_otf.table_catalog.table_catalog import TableMetadata
 from datetime import datetime
-from tiny_otf.config import SQL_TO_PANDAS_TYPES
-
+from tiny_otf.config import SQL_TO_PANDAS_TYPES, initialize_storage
 
 class TinyEngine:
     def __init__(self):
         self.catalog = TableMetadata()
+        self.storage = initialize_storage()
 
     def execute(self, plan: BasePlan):
         match plan:
@@ -52,8 +51,8 @@ class TinyEngine:
         df = plan.to_dataframe(SQL_TO_PANDAS_TYPES)
 
         # Create and save files under date partitions
-        storage = self.catalog.dispatch_storage(table_name)
-        storage.write(df, datetime.today())
+        # storage = self.catalog.dispatch_storage(table_name)
+        self.storage.write(table_name, df, datetime.today())
 
     def _execute_select(self, 
                         plan: SelectPlan) -> pd.DataFrame:
@@ -78,9 +77,11 @@ class TinyEngine:
                 if invalid_cols:
                     raise ValueError(f"Column(s) '{invalid_cols}' do not exist in table {table_name}.")
 
-            storage = self.catalog.dispatch_storage(table_name)
+            # storage = self.catalog.dispatch_storage(table_name)
 
-            return storage.read(columns=columns, limit=5)
+            return self.storage.read(table_name=table_name,
+                                     columns=columns, 
+                                     limit=5)
 
 
     
